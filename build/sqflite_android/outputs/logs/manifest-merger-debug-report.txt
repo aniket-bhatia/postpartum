@@ -1,0 +1,14 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml:1:1-12
+INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml:1:1-12
+	package
+		INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml
+INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/aniket/.pub-cache/hosted/pub.dev/sqflite_android-2.4.4/android/src/main/AndroidManifest.xml
