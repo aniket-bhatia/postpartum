@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519973694123",
+    "project_id": "postpartum-b21ff",
+    "storage_bucket": "postpartum-b21ff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519973694123:android:b155c23cf7f194238da5ee",
+        "android_client_info": {
+          "package_name": "com.example.postpartum_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA01CdetS-xhW6FTOEockU3ViIrqE3Gxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
