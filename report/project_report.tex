@@ -1,0 +1,76 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{brand}{HTML}{4B3A78}
+\titleformat{\section}{\bfseries\color{brand}\normalsize}{}{0pt}{}[\vspace{-6pt}\color{brand}\rule{\linewidth}{0.4pt}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+\setlist{nosep,leftmargin=1.1em,itemsep=0.5pt}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries\color{brand} Postpartum Recovery Companion}\\[2pt]
+  {\small A calm, privacy-first tracking app for postpartum mothers (Flutter \,|\, Firebase Auth \,|\, SQLite)}
+\end{center}
+
+\section{1. Problem and Motivation}
+Postpartum recovery information (feeding, meals, sleep, mood, pain) is scattered across notes and apps, and fatigue makes consistent logging hard.
+A CDC multi-state follow-up (Robbins et al., 2023; PRAMS, N\,=\,1{,}954) found \textbf{7.2\%} of mothers self-reported depressive symptoms at 9--10 months, showing that needs extend beyond the six-week visit.
+WHO lists consistent information, reassurance and support as pillars of postnatal care.
+\textit{Scope: the app helps organise information and notice patterns; it does not diagnose or treat.}
+
+\section{2. Features (Current Implementation)}
+\begin{itemize}
+  \item \textbf{Auth:} email/password sign-up, login and password reset (Firebase Authentication).
+  \item \textbf{Trackers:} breastfeeding timer (side, start/end, duration); meals and daily water glasses; exercise (activity, minutes, notes); daily recovery check-in (sleep, energy, mood, pain, note).
+  \item \textbf{History:} all logs reviewed together; \textbf{Profile:} mother's and baby's name; logout keeps local records.
+\end{itemize}
+
+\section{3. Architecture and Privacy}
+Firebase handles \emph{identity only}. All health logs go to an \textbf{on-device SQLite} database (\texttt{sqflite}, schema v8, six tables keyed by \texttt{firebase\_uid}); nothing is sent to Firestore or a server.
+Code layout: \texttt{lib/main.dart} (entry, Home, tracker screens), \texttt{auth/} (service, login, sign-up), \texttt{database/app\_database.dart} (schema, migrations, queries), \texttt{models/} (5 data classes), \texttt{history/}, \texttt{profile/}.
+\textbf{Limitations:} Android-focused; no cloud backup; database not yet encrypted at file level; not clinically validated.
+
+\section{4. Proposed Validation}
+Device and battery tests $\rightarrow$ usability tests with mothers $\rightarrow$ expert review (nurses, midwives, lactation specialists) $\rightarrow$ opt-in limited pilot. These are \emph{proposed}, not completed.
+
+\section{5. Future Scope}
+\begin{itemize}
+  \item \textbf{Core:} SQLCipher encryption, biometric app lock, reminders, trend charts, PDF export for providers, GCP cloud sync (HTTPS, encryption at rest, HIPAA-level review).
+  \item \textbf{Research:} opt-in, revocable consent; de-identified aggregation over 3--12 months; requires IRB / ethics approval.
+\end{itemize}
+
+\section{6. Future Scope: Agentic AI}
+Agents would act as \emph{assistants that propose, never decide}: a clinician or the mother stays in the loop, and no diagnosis is made.
+\begin{itemize}
+  \item \textbf{Personal pattern agent:} summarises the week (e.g.\ ``night feeds rose while sleep fell'') and prepares a visit summary for the doctor.
+  \item \textbf{Proactive check-in agent:} learns routine and nudges logging at low-effort moments; voice or chat logging (``fed on left side for 15 min'') converted to structured entries.
+  \item \textbf{Safety-escalation agent:} rule-guarded flags for persistently high pain or low mood, with prompts to contact a doctor, ASHA worker or helpline; red-flag symptoms follow fixed clinical rules, not model guesses.
+  \item \textbf{Lactation and nutrition guide agent:} retrieval-based answers grounded in WHO / government guidance with citations; tool use to log meals from photos or speech.
+  \item \textbf{Care-team coordination agent:} consent-based sharing of summaries with partner, ASHA/ANM worker or midwife; appointment and vaccination scheduling.
+  \item \textbf{Design principles:} on-device or small local models first (privacy, offline); human-in-the-loop approval for actions; audit logs; bias and safety evaluation before any pilot.
+\end{itemize}
+
+\section{7. Future Scope: Indian Context}
+\begin{itemize}
+  \item \textbf{Access:} multilingual UI (Hindi and regional languages), voice input, OTP phone login, offline-first lightweight build for low-end Android.
+  \item \textbf{Culture:} Indian food logging (dal, khichdi, ghee, regional dishes), optional 40-day rest-period timeline, consent-based family-supporter view.
+  \item \textbf{Health system:} ASHA/ANM companion view, ABHA (ABDM) linking, JSY / PMMVY / JSSK reminders, U-WIN immunisation and MCP card milestones, e-Sanjeevani tele-consult, Tele-MANAS (14416) for mental health, EPDS screening with clinical oversight.
+  \item \textbf{Compliance:} DPDP Act 2023 (consent, erasure, India-region hosting), ICMR / ethics committee review for research.
+\end{itemize}
+
+\vfill
+{\footnotesize Source code: \url{https://github.com/aniket-bhatia/postpartum}}
+
+\end{document}
